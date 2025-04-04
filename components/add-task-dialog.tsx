@@ -54,25 +54,24 @@ export function AddTaskDialog({ open, onOpenChange }: AddTaskDialogProps) {
     try {
       let combinedDueDate = null
       if (dueDate) {
-        // Parse date using UTC to avoid time zone issues
         const [year, month, day] = dueDate.split("-").map(Number)
-        let dueDateObj = new Date(Date.UTC(year, month - 1, day, 0, 0, 0)) // Midnight UTC
+        let dueDateObj = new Date(year, month - 1, day, 0, 0, 0) // Use local time
 
         if (dueTime) {
           const [hours, minutes] = dueTime.split(":").map(Number)
-          dueDateObj.setUTCHours(hours, minutes, 0, 0) // Set UTC time
+          dueDateObj.setHours(hours, minutes, 0, 0) // Set local time
         }
 
-        combinedDueDate = dueDateObj.toISOString()
+        combinedDueDate = dueDateObj.toISOString() // Convert to ISO string, will still be in local time
       }
 
       let reminderDateTime = null
       if (reminderDate && reminderTime) {
         const [year, month, day] = reminderDate.split("-").map(Number)
-        let reminderDateObj = new Date(Date.UTC(year, month - 1, day, 0, 0, 0))
+        let reminderDateObj = new Date(year, month - 1, day, 0, 0, 0) // Use local time
 
         const [hours, minutes] = reminderTime.split(":").map(Number)
-        reminderDateObj.setUTCHours(hours, minutes, 0, 0)
+        reminderDateObj.setHours(hours, minutes, 0, 0) // Set local time
 
         reminderDateTime = reminderDateObj.toISOString()
       }
@@ -110,6 +109,7 @@ export function AddTaskDialog({ open, onOpenChange }: AddTaskDialogProps) {
       setIsSubmitting(false)
     }
   }
+
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

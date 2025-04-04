@@ -14,7 +14,11 @@ export async function HistoryList() {
   const groupedTasks: Record<string, typeof completedTasks> = {}
 
   completedTasks.forEach((task) => {
-    const completedDate = format(new Date(task.completedAt || task.updatedAt).toISOString(), "yyyy-MM-dd")
+    // Use local time when grouping by date
+    const completedDate = format(
+      new Date(task.completedAt || task.updatedAt),
+      "yyyy-MM-dd"
+    )
     if (!groupedTasks[completedDate]) {
       groupedTasks[completedDate] = []
     }
@@ -22,7 +26,9 @@ export async function HistoryList() {
   })
 
   // Sort dates in descending order
-  const sortedDates = Object.keys(groupedTasks).sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+  const sortedDates = Object.keys(groupedTasks).sort(
+    (a, b) => new Date(b).getTime() - new Date(a).getTime()
+  )
 
   return (
     <div className="space-y-8">
@@ -34,6 +40,7 @@ export async function HistoryList() {
 
           <div className="space-y-2">
             {groupedTasks[date].map((task) => {
+              // Format the completion time in local time
               const completedDate = new Date(task.completedAt || task.updatedAt)
               const formattedTime = format(completedDate, "h:mm a") // Ensure this is in local time
 

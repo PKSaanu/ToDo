@@ -9,10 +9,22 @@ export async function addTask(taskData: TaskInput) {
   const client = await clientPromise
   const db = client.db("taskmaster")
 
-  const now = new Date().toISOString()
+  // Local time conversion on server
+  const now = new Date().toISOString()  // This gets the current UTC time, you can use the server's local time if needed
+
+  // Convert due date and reminder to local time if it's stored in UTC
+  const convertToLocalTime = (dateString: string) => {
+    const dateObj = new Date(dateString);
+    return new Date(dateObj.getTime() - dateObj.getTimezoneOffset() * 60000).toISOString(); // Convert to local time
+  };
+
+  let dueDate = taskData.dueDate ? convertToLocalTime(taskData.dueDate) : null;
+  let reminderDate = taskData.reminder ? convertToLocalTime(taskData.reminder) : null;
 
   const result = await db.collection("tasks").insertOne({
     ...taskData,
+    dueDate,        // Use the converted due date
+    reminder: reminderDate, // Use the converted reminder date
     createdAt: now,
     updatedAt: now,
   })
@@ -20,6 +32,7 @@ export async function addTask(taskData: TaskInput) {
   revalidatePath("/")
   return { success: true, id: result.insertedId.toString() }
 }
+
 
 export async function updateTask(taskData: TaskUpdateInput) {
   const client = await clientPromise
