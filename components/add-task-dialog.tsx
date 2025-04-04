@@ -77,9 +77,6 @@ export function AddTaskDialog({ open, onOpenChange }: AddTaskDialogProps) {
         reminderDateTime = reminderDateObj.toISOString()
       }
 
-      console.log("📌 Final Due Date:", combinedDueDate)
-      console.log("⏰ Final Reminder Date:", reminderDateTime)
-
       await addTask({
         title,
         description,

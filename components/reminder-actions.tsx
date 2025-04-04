@@ -65,7 +65,7 @@ export function ReminderActions({ task }: ReminderActionsProps) {
         size="sm"
         onClick={handleCompleteTask}
         disabled={isCompleting}
-        className="text-green-600 border-green-200 hover:bg-green-50 hover:text-green-700 dark:text-green-400 dark:border-green-800 dark:hover:bg-green-900/20"
+        className=" text-green-400 border-green-800 hover:bg-green-900/20"
       >
         <Check className="h-3.5 w-3.5 mr-1" />
         Complete

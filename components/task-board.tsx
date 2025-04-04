@@ -57,7 +57,7 @@ export async function TaskBoard() {
       case "low":
         return lowPriorityColors[index % lowPriorityColors.length]
       default:
-        return "bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800/30 dark:to-gray-700/30 border-gray-300 dark:border-gray-700"
+        return "bg-gradient-to-br  from-gray-800/30 to-gray-700/30 border-gray-700"
     }
   }
 
@@ -79,7 +79,7 @@ export async function TaskBoard() {
     <div>
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-white">My Tasks</h1>
-        <p className="text-gray-600 dark:text-gray-400">Manage your daily tasks and projects</p>
+        <p className="text-white">Manage your daily tasks and projects</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-min">

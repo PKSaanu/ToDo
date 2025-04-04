@@ -10,7 +10,6 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Saanu's Work History - Task Management",
   description: "A modern task management application with history tracking and reminders",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({

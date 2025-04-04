@@ -59,9 +59,9 @@ export function EmptyState({ type }: EmptyStateProps) {
 
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-full mb-4">{content[type].icon}</div>
+      <div className="bg-gray-800 p-6 rounded-full mb-4">{content[type].icon}</div>
       <h2 className="text-xl font-semibold mb-2">{content[type].title}</h2>
-      <p className="text-gray-600 dark:text-gray-400 mb-6">{content[type].description}</p>
+      <p className="text-gray-400 mb-6">{content[type].description}</p>
       {content[type].action}
       
       {/* Dialog component for adding tasks */}
